@@ -40,4 +40,3 @@ def capture():
 def record():
     for frame in capture():
         redis_conn.set('current_frame', frame)
-        time.sleep(0.01)
