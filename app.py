@@ -1,8 +1,7 @@
 #!/usr/bin/env python3
 
 
-from importlib import import_module
-import os
+from multiprocessing import Process
 from flask import Flask, render_template, Response
 import pycam as camera
 
@@ -31,4 +30,9 @@ def livestream():
 
 
 if __name__ == '__main__':
+    # Start camera daemon
+    proc = Process(target=camera.record)
+    proc.start()
+
+    # Start server
     app.run(host='192.168.0.106', threaded=True)
