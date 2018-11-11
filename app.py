@@ -4,12 +4,17 @@
 from multiprocessing import Process
 from flask import Flask, render_template, Response
 import pycam as camera
+import security
+from flask_login import LoginManager
+from flask_login import login_required
 
 
 app = Flask(__name__)
+login = LoginManager(app)
 
 
 @app.route('/')
+#@login_required
 def index():
     """Video streaming home page."""
     return render_template('index.html')
@@ -23,6 +28,7 @@ def gen(frames):
 
 
 @app.route('/livestream')
+#@login_required
 def livestream():
     frames = camera.stream()
     return Response(gen(frames),
@@ -35,4 +41,4 @@ if __name__ == '__main__':
     proc.start()
 
     # Start server
-    app.run(host='192.168.0.106', threaded=True)
+    app.run(host='192.168.0.106', port=5000, threaded=True)
