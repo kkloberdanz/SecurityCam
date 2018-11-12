@@ -41,4 +41,4 @@ if __name__ == '__main__':
     proc.start()
 
     # Start server
-    app.run(host='192.168.0.103', port=5000, threaded=True)
+    app.run(host='192.168.0.103', port=5000, processes=True)
