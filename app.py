@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
 
 
+import datetime
 from multiprocessing import Process
 from flask import Flask, render_template, Response
 import pycam as camera
-import security
+#import security
 from flask_login import LoginManager
 from flask_login import login_required
 
@@ -36,6 +37,8 @@ def livestream():
 
 
 if __name__ == '__main__':
+    with open('/home/pi/imRunning', 'w') as f:
+        f.write(datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S') + '\n')
     # Start camera daemon
     proc = Process(target=camera.record)
     proc.start()
